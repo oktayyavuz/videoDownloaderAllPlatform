@@ -13,7 +13,7 @@ export async function GET() {
 
     
     try {
-      const botResponse = await fetch('http://localhost:3000/api/bot', {
+      const botResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bot`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       })
@@ -29,7 +29,7 @@ export async function GET() {
 
     
     try {
-      const cleanupResponse = await fetch('http://localhost:3000/api/cleanup', {
+      const cleanupResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cleanup`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       })
@@ -66,13 +66,13 @@ export async function POST(request: NextRequest) {
       const results = {
         bot: false,
         cleanup: false,
-        errors: []
+        errors: [] as string[]
       }
 
       
       try {
         console.log('🤖 Bot başlatılıyor...')
-        const botResponse = await fetch('http://localhost:3000/api/bot', {
+        const botResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bot`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'start' })
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
       
       try {
         console.log('🧹 Cleanup servisi başlatılıyor...')
-        const cleanupResponse = await fetch('http://localhost:3000/api/cleanup', {
+        const cleanupResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cleanup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'start' })
